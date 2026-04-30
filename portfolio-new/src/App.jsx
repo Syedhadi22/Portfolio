@@ -23,58 +23,74 @@ const NAV = ["About", "Experience", "Skills", "Projects", "Contact"];
 
 const EXPERIENCES = [
   {
-    role: "AI Product Engineer",
-    company: "Codet.ai",
-    period: "Oct 2025 – Present",
+    role: "Data Scientist & Product Analyst",
+    company: "Technosys",
+    period: "Mar 2026 – Present",
     tag: "Current",
     bullets: [
-      "Designed and deployed production-grade AI/ML systems with scalable inference pipelines using Python and REST APIs.",
-      "Built and served LLM inference APIs using FastAPI, enabling low-latency, high-throughput model responses.",
-      "Containerized AI services using Docker and deployed across AWS and Azure cloud environments.",
-      "Optimized inference performance through batching, caching, and prompt design — measurable latency reduction.",
-      "Engineered DSL-based agents for dynamic web app generation: frontends, backends, and full-stack workflows.",
-      "Implemented workflow orchestration for multi-step AI pipelines, improving reliability and execution efficiency.",
+      "Own the end-to-end analytics product for restaurant and enterprise clients — from raw data ingestion through insight delivery to stakeholder decision-making.",
+      "Build and maintain interactive dashboards tracking business KPIs (revenue trends, foot traffic, order patterns) reviewed weekly by C-suite to drive operational strategy.",
+      "Developed an AI-powered RAG chatbot enabling non-technical stakeholders to query multi-source business data in plain English, reducing ad-hoc analyst requests by ~40%.",
+      "Conduct funnel and cohort analyses to surface drop-offs and growth levers; findings directly shaped product pivots adopted by client leadership.",
+      "Collaborate across engineering and business teams to define data requirements, prioritize feature requests, and document findings in clear stakeholder reports.",
     ],
   },
   {
-    role: "AI & Business Solutions Executive",
-    company: "VIDIZMO.AI",
-    period: "Jul 2025 – Oct 2025",
-    tag: "Enterprise",
+    role: "AI Product Engineer",
+    company: "Codet.ai",
+    period: "Jun 2025 – Feb 2026",
+    tag: "Product",
     bullets: [
-      "Led AI-driven solution design for multimodal video and evidence management systems serving 50+ enterprise clients.",
-      "Built production-ready AI pipelines for multimodal data processing, document Q&A, and metadata extraction.",
-      "Developed multimodal RAG chatbot architectures that improved proposal conversions by 30%.",
-      "Managed Azure and AWS deployments integrating Active Directory, Service Bus, and secure onboarding pipelines.",
+      "Shaped product roadmap for AI agent features alongside senior leadership — wrote PRDs, defined success metrics, and tracked delivery across engineering and design.",
+      "Built LangGraph-based multi-agent orchestration automating full-stack web app generation from DSL specs, cutting prototype-to-deployment time significantly.",
+      "Shipped TypeScript coding agents (Cursor-style) with autonomous debugging loops; led prompt tuning using structured evals to measurably improve task completion rates.",
+      "Optimized agent performance through structured memory, graph-based execution flows, and iterative experimentation with rollback playbooks.",
     ],
   },
   {
-    role: "AI Engineer",
+    role: "AI Engineer — Product Owner",
     company: "Seeqlo",
-    period: "Jan 2025 – Jul 2025",
+    period: "Jan 2025 – Jun 2025",
     tag: "Remote",
     bullets: [
-      "Built an AI-assisted tutoring platform leveraging LLMs for personalized learning — 3,000+ active learners.",
-      "Deployed transformer-based models into production serving 5,000+ monthly queries via API endpoints.",
-      "Reduced inference latency by 35% through model and pipeline optimization techniques.",
-      "Monitored system performance and improved response reliability through iterative tuning.",
+      "Owned the product end-to-end at Seeqlo (seeqlo.com) — an AI-powered adaptive learning platform with personalized tutoring, curriculum-aligned quizzes, and progress analytics for K-12 students.",
+      "Defined the feature roadmap, wrote user stories and acceptance criteria, ran sprint planning with a 4-person engineering team, and tracked KPIs against learning outcome goals.",
+      "Designed and shipped a LangChain + OpenAI tutoring chatbot serving as Seeqlo's core engagement feature, handling student queries across subjects with strong contextual accuracy.",
+      "Built the adaptive quiz engine using transformer-based answer evaluation to personalise difficulty per learner, improving session depth and retention over time.",
+      "Ran A/B experiments on prompt templates and quiz UI formats; shipped winning variants and reported findings to the founding team via Firebase Analytics dashboards.",
+      "Conducted user research and funnel analysis to identify onboarding drop-offs; redesigned the first-time experience, meaningfully improving early retention.",
     ],
   },
 ];
 
 const SKILLS = [
-  { label: "MLOps & Deployment", items: ["FastAPI", "Flask", "Docker", "REST APIs", "CI/CD", "Model Serving", "Inference Optimization", "Monitoring"] },
-  { label: "AI & Machine Learning", items: ["LLMs", "RAG", "LangChain", "LangGraph", "Hugging Face", "PyTorch", "TensorFlow", "OpenAI API", "Fine-Tuning", "Multi-Agent"] },
-  { label: "Cloud Platforms", items: ["AWS", "Azure", "GCP", "Firebase", "Vercel"] },
-  { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "C++", "Java", "C#"] },
-  { label: "Concepts", items: ["Agent Orchestration", "Graph Databases", "Workflow Automation", "Distributed Systems", "API Design", "Latency Optimization"] },
+  {
+    label: "Product",
+    items: ["Roadmapping", "PRD Writing", "User Research", "A/B Testing", "Funnel Analysis", "Cohort Analysis", "KPI Tracking", "Agile", "Sprint Planning", "Stakeholder Reporting"],
+  },
+  {
+    label: "Analytics",
+    items: ["Firebase Analytics", "Google Analytics", "Excel", "Python (Pandas)", "NumPy", "Dashboard Design", "Data Storytelling"],
+  },
+  {
+    label: "AI & LLM",
+    items: ["LLMs", "AI Agents", "RAG", "LangChain", "LangGraph", "Prompt Engineering", "OpenAI API", "Hugging Face", "Fine-Tuning", "Multi-Agent Systems"],
+  },
+  {
+    label: "Engineering",
+    items: ["Python", "TypeScript", "JavaScript", "REST APIs", "Docker", "AWS", "Azure", "GCP", "FAISS", "Firebase", "Git"],
+  },
+  {
+    label: "Concepts",
+    items: ["Agent Orchestration", "Workflow Automation", "Distributed Systems", "Inference Optimization", "Graph Databases", "MLOps"],
+  },
 ];
 
 const STATS = [
-  { val: "35%", label: "Latency reduced" },
-  { val: "5K+", label: "Monthly queries" },
-  { val: "50+", label: "Enterprise clients" },
-  { val: "3K+", label: "Active learners" },
+  { val: "3", label: "Products shipped" },
+  { val: "~40%", label: "Analyst requests cut" },
+  { val: "2+", label: "Years in AI products" },
+  { val: "K-12", label: "EdTech platform owned" },
 ];
 
 // ─── HOOKS ───────────────────────────────────────────────────────────────────
@@ -169,7 +185,7 @@ function Navbar({ active }) {
 
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 function Hero() {
-  const roles = ["MLOps Engineer", "AI Systems Builder", "LLM Deployment Specialist", "Inference API Developer"];
+  const roles = ["Product-Minded AI Engineer", "Data & Analytics Builder", "AI Agent Developer", "LLM Product Owner"];
   const [ri, setRi] = useState(0);
   const [typed, setTyped] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -200,7 +216,6 @@ function Hero() {
       padding: "120px clamp(20px,6vw,80px) 80px",
       position: "relative",
     }}>
-      {/* Decorative blob */}
       <div style={{
         position: "absolute", top: "8%", right: "4%",
         width: "clamp(260px,35vw,500px)", height: "clamp(260px,35vw,500px)",
@@ -215,7 +230,6 @@ function Hero() {
       }} />
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: "760px" }}>
-        {/* Eyebrow pill */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: "8px",
           padding: "6px 14px 6px 8px",
@@ -231,7 +245,7 @@ function Hero() {
             animation: "pulse 2.4s ease infinite",
           }} />
           <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "12px", fontWeight: 600, color: T.accent, letterSpacing: "0.4px" }}>
-            Available for roles
+            Open to APM & AI product roles
           </span>
         </div>
 
@@ -266,9 +280,10 @@ function Hero() {
           fontSize: "clamp(14px,1.6vw,16px)", color: T.textMuted,
           lineHeight: 1.85, maxWidth: "560px", marginBottom: "48px", fontWeight: 400,
         }}>
-          AI & MLOps Engineer specializing in deploying, scaling, and optimizing
-          ML/LLM systems in production. Experienced in inference APIs, containerized
-          deployments, agent orchestration, and cloud pipelines across AWS, Azure, and GCP.
+          AI engineer with 2+ years building, shipping, and measuring AI-powered products.
+          I bridge the gap between engineering and product — writing PRDs, running A/B experiments,
+          tracking KPIs, and owning features end-to-end. Currently shipping data products at Technosys
+          and previously owned the full product at Seeqlo, an EdTech AI platform.
         </p>
 
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -375,7 +390,7 @@ function Experience() {
   return (
     <section id="experience" ref={ref}
       style={{ padding: "100px clamp(20px,6vw,80px)" }}>
-      <SLabel eyebrow="Experience" heading="Production AI built & shipped" vis={vis} />
+      <SLabel eyebrow="Experience" heading="Products built, owned & shipped" vis={vis} />
 
       <div style={{ marginTop: "48px", display: "flex", flexDirection: "column", gap: "10px" }}>
         {EXPERIENCES.map((e, i) => (
@@ -471,7 +486,7 @@ function Skills() {
         padding: "100px clamp(20px,6vw,80px)",
         background: "linear-gradient(180deg, transparent 0%, rgba(45,122,95,0.03) 50%, transparent 100%)",
       }}>
-      <SLabel eyebrow="Skills" heading="Technologies I work with" vis={vis} />
+      <SLabel eyebrow="Skills" heading="What I bring to the table" vis={vis} />
       <div style={{
         marginTop: "48px",
         display: "grid",
@@ -525,29 +540,32 @@ function Projects() {
   const { ref, vis } = useInView(0.08);
   const items = [
     {
+      eyebrow: "EdTech Product · 2025",
+      title: "Seeqlo — AI Adaptive Learning Platform",
+      body: "Owned the product end-to-end at Seeqlo. Defined the roadmap, wrote PRDs, ran sprints, and tracked KPIs. Shipped a LangChain + OpenAI tutoring chatbot and an adaptive quiz engine with transformer-based difficulty personalisation. Ran A/B experiments and funnel analyses to improve onboarding retention.",
+      tags: ["Product Ownership", "LangChain", "OpenAI", "Firebase", "A/B Testing"],
+      link: "https://www.seeqlo.com",
+    },
+    {
+      eyebrow: "Data Product · 2026",
+      title: "Business Intelligence & RAG Chatbot — Technosys",
+      body: "Built an end-to-end analytics product for restaurant and enterprise clients. Delivers C-suite dashboards tracking revenue, foot traffic, and order KPIs. Developed a RAG chatbot so non-technical stakeholders can query multi-source business data in plain English, reducing ad-hoc analyst requests significantly.",
+      tags: ["RAG", "LLM", "KPI Dashboards", "Funnel Analysis", "Python"],
+      link: null,
+    },
+    {
       eyebrow: "Research · Spring 2025",
       title: "Hybrid CNN–Transformer Brain Tumor Classifier",
-      body: "CrossFormer-based hybrid model with enhanced cross-scale attention for medical image classification. Achieved 3.8% accuracy improvement and 11% faster inference through optimized feature fusion. Integrated FAISS-based retrieval for fast diagnostic comparison with k-fold validation.",
-      tags: ["PyTorch", "CrossFormer", "FAISS", "CNN"],
-    },
-    {
-      eyebrow: "AI Platform · 2025",
-      title: "LLM-Powered Tutoring & Quiz Platform",
-      body: "AI-assisted tutoring platform serving 3,000+ active learners. LangChain + OpenAI chatbot handling 5,000+ monthly student queries with 92% contextual accuracy. Optimized transformer models, reducing inference latency by 35%.",
-      tags: ["LangChain", "OpenAI", "FastAPI", "Docker"],
-    },
-    {
-      eyebrow: "Agent Systems · 2025",
-      title: "DSL-Based Web Generation Agent System",
-      body: "Autonomous agents for dynamic website & web app generation using LangGraph. Enabled automated creation of frontends, backends, and full-stack workflows. TypeScript coding agents for clean code generation and autonomous debugging.",
-      tags: ["LangGraph", "TypeScript", "Multi-Agent", "REST API"],
+      body: "CrossFormer-based hybrid model with enhanced cross-scale attention for medical MRI classification. Achieved 3.8% accuracy improvement and 11% faster inference through optimised feature fusion and preprocessing. Integrated FAISS-based retrieval for fast diagnostic comparison with k-fold validation.",
+      tags: ["PyTorch", "CrossFormer", "FAISS", "CNN", "Medical AI"],
+      link: null,
     },
   ];
 
   return (
     <section id="projects" ref={ref}
       style={{ padding: "100px clamp(20px,6vw,80px)" }}>
-      <SLabel eyebrow="Projects" heading="Research & engineering highlights" vis={vis} />
+      <SLabel eyebrow="Projects" heading="Products & research highlights" vis={vis} />
       <div style={{
         marginTop: "48px",
         display: "grid",
@@ -579,7 +597,7 @@ function Projects() {
             <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13.5px", color: T.textMuted, lineHeight: 1.8, margin: "0 0 22px", flex: 1 }}>
               {p.body}
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "7px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "7px", marginBottom: p.link ? "16px" : "0" }}>
               {p.tags.map(t => (
                 <span key={t} style={{
                   padding: "4px 12px",
@@ -591,6 +609,12 @@ function Projects() {
                 }}>{t}</span>
               ))}
             </div>
+            {p.link && (
+              <a href={p.link} target="_blank" rel="noreferrer" style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "12.5px", fontWeight: 600,
+                color: T.accent, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px",
+              }}>Visit site ↗</a>
+            )}
           </div>
         ))}
       </div>
@@ -618,7 +642,6 @@ function Contact() {
         transform: vis ? "none" : "translateY(24px)",
         transition: "all 0.65s ease",
       }}>
-        {/* Subtle radial accent */}
         <div style={{
           position: "absolute", top: "-60px", left: "50%", transform: "translateX(-50%)",
           width: "400px", height: "200px",
@@ -632,10 +655,10 @@ function Contact() {
           fontFamily: "'Fraunces', serif", fontSize: "clamp(32px,5vw,58px)",
           fontWeight: 700, color: T.text, margin: "0 0 20px", lineHeight: 1.05, letterSpacing: "-1px",
         }}>
-          Let's build<br /><em style={{ fontStyle: "italic", color: T.accent }}>something real.</em>
+          Let's build<br /><em style={{ fontStyle: "italic", color: T.accent }}>something that matters.</em>
         </h2>
-        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", color: T.textMuted, maxWidth: "440px", margin: "0 auto 40px", lineHeight: 1.8 }}>
-          Open to MLOps, AI Engineering, and LLM deployment roles. Available for on-site and remote positions.
+        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", color: T.textMuted, maxWidth: "460px", margin: "0 auto 40px", lineHeight: 1.8 }}>
+          Open to APM, AI Product, and Data Analyst roles. I bring the technical depth to understand what's being built and the product mindset to know why it should be built. On-site and remote.
         </p>
         <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", marginBottom: "40px" }}>
           {[
@@ -682,7 +705,7 @@ function Footer() {
         Syed Hadi Raza<span style={{ color: T.accent }}>.</span>
       </span>
       <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "12px", color: T.textFaint }}>
-        © 2025
+        © 2026
       </span>
     </footer>
   );
