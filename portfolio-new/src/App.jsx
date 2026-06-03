@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Syed Hadi Raza — AI Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+import { useEffect } from 'react'
+
+const markup = `
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -158,132 +152,159 @@ section{position:relative;z-index:1}
 }
 .stack-items{display:flex;flex-wrap:wrap;gap:8px 12px}
 .chip{
-  font-family:var(--mono);font-size:11px;color:var(--muted);
-  padding:3px 0;border-bottom:1px solid transparent;
-  transition:color 0.18s,border-color 0.18s;cursor:default;
-  font-weight:300;
+  display:inline-flex;align-items:center;
+  padding:7px 12px;border-radius:999px;
+  border:1px solid var(--rule);background:rgba(255,255,255,0.3);
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  letter-spacing:0.08em;text-transform:uppercase;
 }
-.chip:hover{color:var(--ink);border-color:var(--ink)}
-.chip.hi{color:var(--ink);font-weight:500;border-bottom:1px solid var(--ink)}
-.chip.hi:hover{color:var(--red);border-color:var(--red)}
-.exp-list{display:flex;flex-direction:column}
+.chip.hi{
+  color:var(--ink);
+  border-color:var(--ink);
+  background:var(--red-dim);
+}
+.exp-list{display:flex;flex-direction:column;gap:18px}
 .exp{
-  display:grid;grid-template-columns:200px 1fr;
-  border-top:1px solid var(--rule);
+  border:1px solid var(--rule);
+  background:rgba(255,255,255,0.38);
+  overflow:hidden;
   cursor:pointer;
+  transition:border-color 0.2s,transform 0.2s,background 0.2s;
 }
-.exp:last-child{border-bottom:1px solid var(--rule)}
+.exp:hover{border-color:var(--ink);transform:translateY(-1px)}
 .exp-meta{
-  padding:24px 24px 24px 0;
-  border-right:1px solid var(--rule);
+  display:grid;grid-template-columns:160px 1fr auto;gap:16px;
+  align-items:center;padding:18px 20px;border-bottom:1px solid var(--rule);
 }
-.exp-period{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:0.08em;line-height:1.7;margin-bottom:8px}
-.exp-co{font-family:var(--display);font-size:22px;letter-spacing:0.06em;color:var(--ink);line-height:1;margin-bottom:6px}
-.exp-badge{
-  display:inline-block;font-family:var(--mono);font-size:9px;
-  padding:2px 8px;border:1px solid var(--rule);
-  color:var(--faint);letter-spacing:0.12em;text-transform:uppercase;
-}
-.exp-badge.now{border-color:var(--red);color:var(--red)}
-.exp-content{padding:24px 0 24px 28px}
-.exp-role{
-  font-family:var(--serif);font-size:clamp(17px,2.2vw,22px);
-  color:var(--ink);margin-bottom:8px;font-style:italic;
-}
-.exp-teaser{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:300;line-height:1.7}
-.exp-expand{
+.exp-period,.exp-co{
   font-family:var(--mono);font-size:10px;color:var(--faint);
-  letter-spacing:0.14em;text-transform:uppercase;
-  margin-top:10px;display:flex;align-items:center;gap:6px;
+  letter-spacing:0.16em;text-transform:uppercase;
 }
-.exp-expand::after{content:'↓';transition:transform 0.25s}
-.exp.open .exp-expand::after{transform:rotate(180deg)}
+.exp-co{color:var(--ink)}
+.exp-badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);padding:6px 10px;border:1px solid var(--rule);border-radius:999px;
+}
+.exp-badge.now{color:var(--red);border-color:var(--red)}
+.exp-content{padding:20px}
+.exp-role{
+  font-family:var(--display);font-size:clamp(28px,4vw,42px);
+  line-height:0.95;letter-spacing:0.04em;margin-bottom:12px;
+}
+.exp-teaser{
+  font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--muted);
+  max-width:820px;
+}
+.exp-expand{
+  margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--ink);
+  letter-spacing:0.16em;text-transform:uppercase;
+}
 .exp-details{
-  display:none;margin-top:16px;
-  border-top:1px solid var(--rule);padding-top:16px;
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height 0.45s ease,opacity 0.35s ease,margin-top 0.35s ease;
+  margin-top:0;
 }
-.exp.open .exp-details{display:block}
+.exp.open .exp-details{max-height:420px;opacity:1;margin-top:18px}
 .exp-bullet{
-  display:flex;gap:12px;padding:7px 0;
-  font-family:var(--mono);font-size:11px;color:var(--muted);
-  line-height:1.75;font-weight:300;
-  border-bottom:1px dashed var(--paper3);
+  position:relative;padding-left:18px;margin-top:12px;
+  font-family:var(--mono);font-size:11px;line-height:1.85;color:var(--muted);
 }
-.exp-bullet:last-child{border-bottom:none}
-.exp-bullet::before{content:'—';color:var(--faint);flex-shrink:0}
 .exp-bullet strong{color:var(--ink);font-weight:500}
-.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1.5px solid var(--ink)}
+.exp-bullet::before{
+  content:'';position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;
+  background:var(--red);
+}
+.proj-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
 .proj-card{
-  padding:28px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  display:flex;flex-direction:column;
-  transition:background 0.2s;
+  border:1px solid var(--rule);background:rgba(255,255,255,0.4);
+  padding:22px;display:flex;flex-direction:column;min-height:100%;
 }
-.proj-card:nth-child(2n){border-right:none}
-.proj-card:nth-last-child(-n+2){border-bottom:none}
-.proj-card:hover{background:var(--paper2)}
-.proj-eyebrow{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:10px}
+.proj-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:14px;
+}
 .proj-title{
-  font-family:var(--serif);font-size:clamp(15px,1.8vw,19px);
-  font-style:italic;color:var(--ink);margin-bottom:10px;line-height:1.25;
+  font-family:var(--display);
+  font-size:clamp(24px,3vw,34px);
+  line-height:0.95;letter-spacing:0.04em;margin-bottom:12px;
 }
-.proj-body{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.85;flex:1;font-weight:300;margin-bottom:14px}
+.proj-body{
+  font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted);
+  margin-bottom:16px;
+}
 .proj-body strong{color:var(--ink);font-weight:500}
-.proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.proj-chip{font-family:var(--mono);font-size:10px;color:var(--faint);border:1px solid var(--rule);padding:2px 8px}
-.proj-link{font-family:var(--mono);font-size:10px;color:var(--ink);letter-spacing:0.1em;text-decoration:none;text-transform:uppercase}
+.proj-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.proj-chip{
+  display:inline-flex;padding:7px 12px;border-radius:999px;
+  border:1px solid var(--rule);font-family:var(--mono);font-size:10px;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,0.3);
+}
+.proj-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:18px;
+  font-family:var(--mono);font-size:11px;color:var(--red);text-decoration:none;
+  letter-spacing:0.12em;text-transform:uppercase;
+}
 .proj-link:hover{text-decoration:underline}
 .contact-inner{
-  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:48px;align-items:start;
 }
 .contact-big{
-  font-family:var(--display);
-  font-size:clamp(52px,9vw,110px);
-  line-height:0.88;letter-spacing:0.03em;color:var(--ink);
+  font-family:var(--display);font-size:clamp(58px,10vw,124px);
+  line-height:0.86;letter-spacing:0.03em;color:var(--ink);
 }
-.contact-big em{font-family:var(--serif);font-style:italic;letter-spacing:0;font-size:0.7em}
-.contact-right{padding-top:12px}
-.contact-sub{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:28px}
+.contact-big em{font-family:var(--serif);font-style:italic;color:var(--red)}
+.contact-sub{
+  font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted);
+  margin-bottom:20px;
+}
 .contact-links-stack{display:flex;flex-direction:column;gap:0}
 .contact-link{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 0;border-top:1px solid var(--rule);
-  font-family:var(--mono);font-size:11px;color:var(--muted);
-  text-decoration:none;letter-spacing:0.08em;
-  transition:color 0.2s;
+  display:flex;justify-content:space-between;gap:16px;align-items:center;
+  padding:16px 0;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;color:var(--ink);text-decoration:none;
+  letter-spacing:0.1em;
 }
 .contact-link:last-child{border-bottom:1px solid var(--rule)}
-.contact-link:hover{color:var(--ink)}
-.contact-link span{color:var(--faint);font-size:10px}
-.contact-meta{margin-top:24px;font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:0.1em;line-height:1.7}
-footer{
-  border-top:1.5px solid var(--ink);
-  max-width:1100px;margin:0 auto;
-  padding:20px clamp(16px,5vw,56px);
-  display:flex;justify-content:space-between;align-items:center;
-  position:relative;z-index:1;
-  font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:0.12em;
+.contact-link span{color:var(--red)}
+.contact-meta{
+  margin-top:18px;font-family:var(--mono);font-size:10px;line-height:1.8;color:var(--faint);
+  letter-spacing:0.12em;text-transform:uppercase;
 }
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.65s ease,transform 0.65s ease}
-.reveal.in{opacity:1;transform:none}
-@media(max-width:680px){
-  .nav-links{display:none}
-  .hero-bottom{grid-template-columns:1fr}
+footer{
+  max-width:1100px;margin:0 auto;padding:18px clamp(16px,5vw,56px) 34px;
+  display:flex;justify-content:space-between;gap:16px;
+  font-family:var(--mono);font-size:10px;color:var(--faint);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+@keyframes pulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(192,57,43,0.35)}
+  50%{transform:scale(1.08);box-shadow:0 0 0 7px rgba(192,57,43,0)}
+}
+@media (max-width: 900px){
+  .hero-bottom,.contact-inner,.proj-grid{grid-template-columns:1fr}
   .hero-right{text-align:left}
   .hero-btns{justify-content:flex-start}
-  .exp{grid-template-columns:1fr}
-  .exp-meta{border-right:none;border-bottom:1px solid var(--rule);padding:16px 0}
-  .exp-content{padding:16px 0}
-  .proj-grid{grid-template-columns:1fr}
-  .proj-card{border-right:none!important;border-bottom:1px solid var(--rule)!important}
-  .proj-card:last-child{border-bottom:none!important}
-  .contact-inner{grid-template-columns:1fr}
   .section-label{flex-wrap:wrap}
   .section-sub{text-align:left;margin-left:0}
+  .exp-meta{grid-template-columns:1fr;align-items:flex-start}
+}
+@media (max-width: 700px){
+  nav{height:auto;min-height:48px;flex-direction:column;align-items:flex-start;padding:10px 16px}
+  .nav-links{width:100%;margin-top:10px;border-top:1px solid var(--rule)}
+  .nav-links a{flex:1;justify-content:center;height:40px;padding:0 10px}
+  .hero-name-line2{flex-direction:column;align-items:flex-start;gap:6px}
+  .hero-name-line2 .serif-bit{padding-bottom:0;white-space:normal}
+  .stack-row{grid-template-columns:1fr;gap:8px}
+  .exp-content{padding:16px}
+  .section-inner{padding:72px 16px}
+  footer{flex-direction:column}
 }
 </style>
-</head>
-<body>
 
 <nav>
   <div class="nav-logo">HADI RAZA</div>
@@ -397,7 +418,6 @@ footer{
       <div class="section-sub">systems built, agents shipped</div>
     </div>
     <div class="exp-list">
-
       <div class="exp" onclick="toggleExp(this)">
         <div class="exp-meta">
           <div class="exp-period">Mar 2026 — Present</div>
@@ -455,7 +475,6 @@ footer{
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -558,17 +577,64 @@ footer{
   <span>SYED HADI RAZA — AI ENGINEER</span>
   <span>© 2026</span>
 </footer>
+`
 
-<script>
-function toggleExp(el){
-  const wasOpen = el.classList.contains('open');
-  document.querySelectorAll('.exp').forEach(e=>e.classList.remove('open'));
-  if(!wasOpen) el.classList.add('open');
+export default function App() {
+  useEffect(() => {
+    document.title = 'Syed Hadi Raza — AI Engineer'
+
+    const fontLinks = [
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&display=swap',
+      },
+    ]
+
+    const createdLinks = fontLinks.map((attributes) => {
+      const link = document.createElement('link')
+      Object.entries(attributes).forEach(([key, value]) => {
+        link.setAttribute(key, value)
+      })
+      document.head.appendChild(link)
+      return link
+    })
+
+    window.toggleExp = (element) => {
+      const wasOpen = element.classList.contains('open')
+      document.querySelectorAll('.exp').forEach((expElement) => expElement.classList.remove('open'))
+      if (!wasOpen) {
+        element.classList.add('open')
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in')
+          }
+        })
+      },
+      { threshold: 0.06 },
+    )
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element))
+
+    return () => {
+      observer.disconnect()
+      createdLinks.forEach((link) => link.remove())
+      delete window.toggleExp
+    }
+  }, [])
+
+  return <div dangerouslySetInnerHTML={{ __html: markup }} />
 }
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
-},{threshold:0.06});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
-</body>
-</html>
